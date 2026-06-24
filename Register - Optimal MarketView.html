@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://account.optimalmarketview.com/register -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Optimal MarketView</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Register - Optimal MarketView_files/css2" rel="stylesheet">
+    <link rel="stylesheet" href="./Register - Optimal MarketView_files/style.css">
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body, * {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+        }
+    </style>
+    <!-- Smartsupp Live Chat script -->
+<script type="text/javascript" charset="utf-8" async="" src="./Register - Optimal MarketView_files/loader.js.download"></script><script type="text/javascript">
+var _smartsupp = _smartsupp || {};
+_smartsupp.key = '78e877bf4c3055da644fc485f9b131ac2c931f9f';
+window.smartsupp||(function(d) {
+  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+  c.type='text/javascript';c.charset='utf-8';c.async=true;
+  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+})(document);
+</script>
+
+</head>
+<body class="bg-gray-50 font-poppins">
+<!-- Loading Overlay -->
+<div id="loading-overlay" class="fixed inset-0 bg-white z-[99999] flex items-center justify-center transition-opacity duration-300 hidden" style="display: none; inset: 0px; width: 100%; height: 100%; opacity: 0;">
+    <div class="text-center">
+        <!-- Spinner -->
+        <div class="relative w-20 h-20 mx-auto mb-6">
+            <div class="absolute inset-0 border-4 border-orange-100 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-orange-500 rounded-full border-t-transparent animate-spin"></div>
+            <div class="absolute inset-2 border-4 border-orange-200 rounded-full border-b-transparent animate-spin" style="animation-direction: reverse; animation-duration: 0.8s;"></div>
+        </div>
+        <!-- Loading Text -->
+        <p class="text-gray-700 font-semibold text-xl">Loading...</p>
+        <p class="text-gray-500 text-sm mt-2">Please wait</p>
+    </div>
+</div>
+
+<script>
+// Immediately hide body content on initial page load (runs before DOM is ready)
+(function() {
+    if (document.body) {
+        document.body.classList.add('loading-active');
+    } else {
+        // Wait for body to exist
+        const observer = new MutationObserver(function(mutations, obs) {
+            if (document.body) {
+                document.body.classList.add('loading-active');
+                obs.disconnect();
+            }
+        });
+        observer.observe(document.documentElement, { childList: true });
+    }
+})();
+</script>
+
+<style>
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+#loading-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 99999 !important;
+    background: white !important;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+/* Hide all body content when loading is active */
+body.loading-active > *:not(#loading-overlay) {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Ensure loading overlay is always visible */
+body.loading-active #loading-overlay {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+</style>
+
+<script>
+// Loading overlay management - runs immediately
+(function() {
+    let loadingOverlay = null;
+    let isInitialized = false;
+    
+    // Initialize overlay reference
+    function initOverlay() {
+        if (!loadingOverlay) {
+            loadingOverlay = document.getElementById('loading-overlay');
+        }
+        return loadingOverlay !== null;
+    }
+    
+    // Show loading overlay immediately
+    function showLoading() {
+        if (!initOverlay()) {
+            // If overlay doesn't exist yet, create it
+            const overlay = document.createElement('div');
+            overlay.id = 'loading-overlay';
+            overlay.className = 'fixed inset-0 bg-white z-[99999] flex items-center justify-center transition-opacity duration-300';
+            overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 99999; background: white;';
+            overlay.innerHTML = `
+                <div class="text-center">
+                    <div class="relative w-20 h-20 mx-auto mb-6">
+                        <div class="absolute inset-0 border-4 border-orange-100 rounded-full"></div>
+                        <div class="absolute inset-0 border-4 border-orange-500 rounded-full border-t-transparent animate-spin"></div>
+                        <div class="absolute inset-2 border-4 border-orange-200 rounded-full border-b-transparent animate-spin" style="animation-direction: reverse; animation-duration: 0.8s;"></div>
+                    </div>
+                    <p class="text-gray-700 font-semibold text-xl">Loading...</p>
+                    <p class="text-gray-500 text-sm mt-2">Please wait</p>
+                </div>
+            `;
+            overlay.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 99999; background: white; display: flex; align-items: center; justify-content: center;';
+            document.body.appendChild(overlay);
+            loadingOverlay = overlay;
+        }
+        
+        if (loadingOverlay) {
+            // Show immediately with no delay - ensure it covers everything
+            loadingOverlay.style.cssText = 'position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100vw !important; height: 100vh !important; z-index: 99999 !important; background: white !important; display: flex !important; align-items: center !important; justify-content: center !important; opacity: 1 !important;';
+            loadingOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Hide all body content except the loading overlay
+            document.body.classList.add('loading-active');
+        }
+    }
+    
+    // Hide loading overlay
+    function hideLoading() {
+        if (initOverlay() && loadingOverlay) {
+            loadingOverlay.style.opacity = '0';
+            setTimeout(function() {
+                if (loadingOverlay) {
+                    loadingOverlay.style.display = 'none';
+                    loadingOverlay.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    // Show body content again
+                    document.body.classList.remove('loading-active');
+                }
+            }, 300);
+        }
+    }
+    
+    // Initialize when DOM is ready
+    function initialize() {
+        if (isInitialized) return;
+        isInitialized = true;
+        
+        initOverlay();
+        
+        // Initially hide body content until page is fully loaded
+        // This prevents navbar and content from showing during initial page load
+        if (document.readyState === 'loading') {
+            document.body.classList.add('loading-active');
+        }
+        
+        // Show loading on link clicks - use capture phase for immediate response
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.href) {
+                // Skip special links
+                if (link.href.startsWith('javascript:') || 
+                    link.href.startsWith('mailto:') || 
+                    link.href.startsWith('tel:') ||
+                    link.target === '_blank' ||
+                    link.hasAttribute('data-no-loading')) {
+                    return;
+                }
+                
+                // Check if it's an internal link
+                try {
+                    const currentHost = window.location.host;
+                    const linkUrl = new URL(link.href, window.location.href);
+                    const linkHost = linkUrl.host;
+                    const currentPath = window.location.pathname;
+                    const linkPath = linkUrl.pathname;
+                    
+                    // Only show loading for internal navigation (same host)
+                    if ((linkHost === currentHost || linkHost === '') && linkPath !== currentPath) {
+                        // Don't show for anchors
+                        if (!link.href.includes('#') || link.href.split('#')[0] !== window.location.href.split('#')[0]) {
+                            // Show IMMEDIATELY - no delay, no animation frame
+                            showLoading();
+                        }
+                    }
+                } catch (err) {
+                    // Invalid URL, ignore
+                }
+            }
+        }, true); // Use capture phase for immediate response - runs BEFORE default behavior
+        
+        // Show loading on form submissions (but not if form has data-no-confirm attribute)
+        document.addEventListener('submit', function(e) {
+            const form = e.target;
+            // Don't show loading if form has data-no-loading or data-no-confirm attribute
+            // (data-no-confirm forms show confirmation modals first)
+            if (form.tagName === 'FORM' && 
+                form.method.toLowerCase() !== 'get' &&
+                !form.hasAttribute('data-no-loading') &&
+                !form.hasAttribute('data-no-confirm')) {
+                showLoading();
+            }
+        }, true);
+        
+        // Hide loading when page is fully loaded (with a small delay to show it briefly)
+        function hideOnLoad() {
+            // Show briefly on page load, then hide
+            setTimeout(function() {
+                hideLoading();
+            }, 200);
+        }
+        
+        // Wait for page to be fully loaded before showing content
+        if (document.readyState === 'complete') {
+            hideOnLoad();
+        } else {
+            window.addEventListener('load', function() {
+                // Small delay to ensure everything is rendered
+                setTimeout(hideOnLoad, 100);
+            });
+            // Also handle DOMContentLoaded as fallback
+            document.addEventListener('DOMContentLoaded', function() {
+                // Only hide if page is already complete, otherwise wait for load event
+                if (document.readyState === 'complete') {
+                    hideOnLoad();
+                }
+            });
+        }
+        
+        // Also hide on page visibility change (back button, etc.)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                setTimeout(hideLoading, 100);
+            }
+        });
+    }
+    
+    // Initialize immediately if DOM is ready, otherwise wait
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+        initialize();
+    }
+    
+    // Also initialize on page show (for back/forward navigation)
+    window.addEventListener('pageshow', function() {
+        hideLoading();
+    });
+    
+    // Expose functions globally for manual control
+    window.showLoading = showLoading;
+    window.hideLoading = hideLoading;
+})();
+</script>
+
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="Optimizetradepro _ Home.html" class="text-xl font-bold text-blue-600">
+                        Optimal MarketView                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                                            <a href="Login - Optimal MarketView.html" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                        <a href="Register - Optimal MarketView.html" class="btn-primary">Sign Up</a>
+                                    </div>
+            </div>
+        </div>
+    </nav>
+
+
+<main class="max-w-md mx-auto px-4 py-16">
+    <div class="card">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-900">Create Account</h1>
+            <p class="text-gray-600 mt-2">Join Optimal MarketView today</p>
+        </div>
+        
+                
+                
+        <form action="http://127.0.0.1:5500/Register%20-%20Optimal%20MarketView.html" method="POST">
+                        
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="firstname" class="label">First Name</label>
+                    <input type="text" id="firstname" name="firstname" class="input-field" required="">
+                </div>
+                <div>
+                    <label for="lastname" class="label">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" class="input-field" required="">
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label for="username" class="label">Username</label>
+                <input type="text" id="username" name="username" class="input-field" pattern="[a-zA-Z0-9_]{3,20}" required="">
+                <p class="text-xs text-gray-500 mt-1">3-20 characters, letters, numbers, and underscores only</p>
+            </div>
+            
+            <div class="mb-4">
+                <label for="email" class="label">Email Address</label>
+                <input type="email" id="email" name="email" class="input-field" required="">
+            </div>
+            
+            <div class="mb-4">
+                <label for="phone" class="label">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="input-field" required="">
+            </div>
+            
+            <div class="mb-4">
+                <label for="nationality" class="label">Country</label>
+                <select id="nationality" name="nationality" class="input-field" required="">
+                    <option value="">Select your country</option>
+                    <option value="Afghanistan">Afghanistan</option>
+                    <option value="Albania">Albania</option>
+                    <option value="Algeria">Algeria</option>
+                    <option value="Andorra">Andorra</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Armenia">Armenia</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Azerbaijan">Azerbaijan</option>
+                    <option value="Bahamas">Bahamas</option>
+                    <option value="Bahrain">Bahrain</option>
+                    <option value="Bangladesh">Bangladesh</option>
+                    <option value="Barbados">Barbados</option>
+                    <option value="Belarus">Belarus</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Belize">Belize</option>
+                    <option value="Benin">Benin</option>
+                    <option value="Bhutan">Bhutan</option>
+                    <option value="Bolivia">Bolivia</option>
+                    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                    <option value="Botswana">Botswana</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Brunei">Brunei</option>
+                    <option value="Bulgaria">Bulgaria</option>
+                    <option value="Burkina Faso">Burkina Faso</option>
+                    <option value="Burundi">Burundi</option>
+                    <option value="Cabo Verde">Cabo Verde</option>
+                    <option value="Cambodia">Cambodia</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Central African Republic">Central African Republic</option>
+                    <option value="Chad">Chad</option>
+                    <option value="Chile">Chile</option>
+                    <option value="China">China</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Comoros">Comoros</option>
+                    <option value="Congo">Congo</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="Croatia">Croatia</option>
+                    <option value="Cuba">Cuba</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="Czech Republic">Czech Republic</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Dominica">Dominica</option>
+                    <option value="Dominican Republic">Dominican Republic</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="El Salvador">El Salvador</option>
+                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                    <option value="Eritrea">Eritrea</option>
+                    <option value="Estonia">Estonia</option>
+                    <option value="Eswatini">Eswatini</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Fiji">Fiji</option>
+                    <option value="Finland">Finland</option>
+                    <option value="France">France</option>
+                    <option value="Gabon">Gabon</option>
+                    <option value="Gambia">Gambia</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Greece">Greece</option>
+                    <option value="Grenada">Grenada</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Guinea">Guinea</option>
+                    <option value="Guinea-Bissau">Guinea-Bissau</option>
+                    <option value="Guyana">Guyana</option>
+                    <option value="Haiti">Haiti</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Iceland">Iceland</option>
+                    <option value="India">India</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Iran">Iran</option>
+                    <option value="Iraq">Iraq</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Israel">Israel</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Jamaica">Jamaica</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Jordan">Jordan</option>
+                    <option value="Kazakhstan">Kazakhstan</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Kiribati">Kiribati</option>
+                    <option value="Kosovo">Kosovo</option>
+                    <option value="Kuwait">Kuwait</option>
+                    <option value="Kyrgyzstan">Kyrgyzstan</option>
+                    <option value="Laos">Laos</option>
+                    <option value="Latvia">Latvia</option>
+                    <option value="Lebanon">Lebanon</option>
+                    <option value="Lesotho">Lesotho</option>
+                    <option value="Liberia">Liberia</option>
+                    <option value="Libya">Libya</option>
+                    <option value="Liechtenstein">Liechtenstein</option>
+                    <option value="Lithuania">Lithuania</option>
+                    <option value="Luxembourg">Luxembourg</option>
+                    <option value="Madagascar">Madagascar</option>
+                    <option value="Malawi">Malawi</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Maldives">Maldives</option>
+                    <option value="Mali">Mali</option>
+                    <option value="Malta">Malta</option>
+                    <option value="Marshall Islands">Marshall Islands</option>
+                    <option value="Mauritania">Mauritania</option>
+                    <option value="Mauritius">Mauritius</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Micronesia">Micronesia</option>
+                    <option value="Moldova">Moldova</option>
+                    <option value="Monaco">Monaco</option>
+                    <option value="Mongolia">Mongolia</option>
+                    <option value="Montenegro">Montenegro</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Myanmar">Myanmar</option>
+                    <option value="Namibia">Namibia</option>
+                    <option value="Nauru">Nauru</option>
+                    <option value="Nepal">Nepal</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Niger">Niger</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="North Korea">North Korea</option>
+                    <option value="North Macedonia">North Macedonia</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Oman">Oman</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="Palau">Palau</option>
+                    <option value="Palestine">Palestine</option>
+                    <option value="Panama">Panama</option>
+                    <option value="Papua New Guinea">Papua New Guinea</option>
+                    <option value="Paraguay">Paraguay</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Qatar">Qatar</option>
+                    <option value="Romania">Romania</option>
+                    <option value="Russia">Russia</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                    <option value="Saint Lucia">Saint Lucia</option>
+                    <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                    <option value="Samoa">Samoa</option>
+                    <option value="San Marino">San Marino</option>
+                    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Senegal">Senegal</option>
+                    <option value="Serbia">Serbia</option>
+                    <option value="Seychelles">Seychelles</option>
+                    <option value="Sierra Leone">Sierra Leone</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Slovakia">Slovakia</option>
+                    <option value="Slovenia">Slovenia</option>
+                    <option value="Solomon Islands">Solomon Islands</option>
+                    <option value="Somalia">Somalia</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="South Sudan">South Sudan</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Sri Lanka">Sri Lanka</option>
+                    <option value="Sudan">Sudan</option>
+                    <option value="Suriname">Suriname</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Syria">Syria</option>
+                    <option value="Taiwan">Taiwan</option>
+                    <option value="Tajikistan">Tajikistan</option>
+                    <option value="Tanzania">Tanzania</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Timor-Leste">Timor-Leste</option>
+                    <option value="Togo">Togo</option>
+                    <option value="Tonga">Tonga</option>
+                    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                    <option value="Tunisia">Tunisia</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="Turkmenistan">Turkmenistan</option>
+                    <option value="Tuvalu">Tuvalu</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Ukraine">Ukraine</option>
+                    <option value="United Arab Emirates">United Arab Emirates</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="Uruguay">Uruguay</option>
+                    <option value="Uzbekistan">Uzbekistan</option>
+                    <option value="Vanuatu">Vanuatu</option>
+                    <option value="Vatican City">Vatican City</option>
+                    <option value="Venezuela">Venezuela</option>
+                    <option value="Vietnam">Vietnam</option>
+                    <option value="Yemen">Yemen</option>
+                    <option value="Zambia">Zambia</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label for="password" class="label">Password</label>
+                <input type="password" id="password" name="password" class="input-field" minlength="8" required="">
+                <p class="text-xs text-gray-500 mt-1">Minimum 8 characters</p>
+            </div>
+            
+            <div class="mb-6">
+                <label for="password_confirm" class="label">Confirm Password</label>
+                <input type="password" id="password_confirm" name="password_confirm" class="input-field" minlength="8" required="">
+            </div>
+            
+            <button type="submit" class="btn-primary w-full">Create Account</button>
+        </form>
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">Already have an account? <a href="Login - Optimal MarketView.html" class="text-blue-600 hover:text-blue-700">Login</a></p>
+        </div>
+    </div>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('password_confirm');
+    
+    form.addEventListener('submit', function(e) {
+        if (password.value !== confirmPassword.value) {
+            e.preventDefault();
+            alert('Passwords do not match');
+            return false;
+        }
+    });
+});
+</script>
+
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center text-gray-600 text-sm">
+                <p>© 2026 Optimal MarketView. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Flash message auto-dismiss
+        document.addEventListener('DOMContentLoaded', function() {
+            const messages = document.querySelectorAll('.flash-message');
+            messages.forEach(function(msg) {
+                setTimeout(function() {
+                    msg.style.transition = 'opacity 0.5s';
+                    msg.style.opacity = '0';
+                    setTimeout(function() {
+                        msg.remove();
+                    }, 500);
+                }, 5000);
+            });
+        });
+        
+        // Copy to clipboard function
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(function() {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('bg-green-600');
+                setTimeout(function() {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-600');
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy to clipboard');
+            });
+        }
+    </script>
+
+
+
+
+
+
+
+<iframe id="chat-application-iframe" title="Smartsupp" aria-hidden="true" style="display: block; position: fixed; top: 0px; left: 0px; width: 1px; height: 1px; opacity: 0; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; z-index: -1; pointer-events: none;" src="./Register - Optimal MarketView_files/saved_resource.html"></iframe><div id="smartsupp-widget-container"><!----><!----><!----> <!----><!----> <!----><div data-testid="widgetButtonFrame" style="border-radius: 9999px; box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 2px 32px; color-scheme: normal; height: 56px; position: fixed; bottom: 24px; left: initial; right: 12px; z-index: 10000000; width: 109px;"><iframe allowfullscreen="" scrolling="no" id="widgetButtonFrame" title="Smartsupp widget button" style="position: absolute; width: 100%; height: 100%; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; display: block; text-align: left; margin: 0px; padding: 0px; top: 0px; left: 0px; opacity: 1;" src="./Register - Optimal MarketView_files/saved_resource(1).html"></iframe><!----></div><!----> <!----><!----> <!----><!----><!----></div></body></html>
