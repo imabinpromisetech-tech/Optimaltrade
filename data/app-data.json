@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "id": "1782372485987",
+      "firstName": "Admin",
+      "lastName": "Test",
+      "username": "admin1782372485977",
+      "email": "kyc-1782372485977@example.com",
+      "phone": "+1234567890",
+      "nationality": "United States",
+      "password": "password123",
+      "balance": 250000,
+      "verified": false,
+      "twoFactorEnabled": false,
+      "createdAt": "2026-06-25T07:28:05.987Z"
+    },
+    {
+      "id": "1782372544590",
+      "firstName": "Test",
+      "lastName": "User",
+      "username": "testuser",
+      "email": "testuser@example.com",
+      "phone": "+123",
+      "nationality": "US",
+      "password": "pass1234",
+      "balance": 250000,
+      "verified": false,
+      "twoFactorEnabled": false,
+      "createdAt": "2026-06-25T07:29:04.590Z"
+    },
+    {
+      "id": "1782372582756",
+      "firstName": "Test",
+      "lastName": "User",
+      "username": "testuser",
+      "email": "testuser2@example.com",
+      "phone": "+123",
+      "nationality": "US",
+      "password": "pass1234",
+      "balance": 250000,
+      "verified": false,
+      "twoFactorEnabled": false,
+      "createdAt": "2026-06-25T07:29:42.756Z"
+    }
+  ],
+  "deposits": [],
+  "withdrawals": [],
+  "sessions": [
+    {
+      "userId": "1782372485987",
+      "token": "token-1782372485987"
+    },
+    {
+      "userId": "1782372544590",
+      "token": "token-1782372544590"
+    },
+    {
+      "userId": "1782372582756",
+      "token": "token-1782372582756"
+    }
+  ],
+  "settings": {
+    "balance": 250000,
+    "kycVerified": false,
+    "twoFactorEnabled": false
+  }
+}

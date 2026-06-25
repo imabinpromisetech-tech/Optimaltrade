@@ -845,12 +845,11 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const formData = new FormData(form);
+        const amountValue = document.getElementById('amount').value;
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         
         // Validate amount - only whole numbers
-        const amountValue = formData.get('amount');
         const amount = parseFloat(amountValue);
         
         if (isNaN(amount) || amount <= 0) {
@@ -875,7 +874,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        if (!formData.get('deposit_method')) {
+        if (!document.getElementById('deposit_method').value) {
             formMessage.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg';
             formMessage.textContent = 'Please select a payment method';
             formMessage.classList.remove('hidden');
@@ -887,17 +886,17 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Processing...';
         formMessage.classList.add('hidden');
         
-        // Log form data for debugging
-        console.log('Submitting deposit:', {
-            deposit_method: formData.get('deposit_method'),
-            amount: formData.get('amount'),
-            crypto_type: formData.get('crypto_type'),
-            wallet_address: formData.get('wallet_address')
-        });
+        const payload = {
+            amount: amountValue,
+            deposit_method: document.getElementById('deposit_method').value,
+            crypto_type: document.getElementById('crypto_type').value,
+            wallet_address: document.getElementById('wallet_address').value
+        };
         
-        fetch('http://127.0.0.1:5500/Deposit%20Details%20-%20Optimal%20MarketView.html', {
+        fetch('/api/deposits', {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         })
         .then(response => {
             // Check if response is ok

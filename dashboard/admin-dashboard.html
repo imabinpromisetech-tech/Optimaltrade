@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Optimal MarketView</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #228C22;
+      --green-dark: #0b6623;
+      --bg: #f4f7fb;
+      --text: #233142;
+      --muted: #6b7280;
+      --white: #fff;
+      --border: #e5e7eb;
+      --danger: #dc2626;
+      --warning: #f59e0b;
+      --success: #16a34a;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+    .topbar { background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%); color: var(--white); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+    .topbar h1 { margin: 0; font-size: 1.35rem; }
+    .topbar .badge { background: rgba(255,255,255,0.16); padding: 8px 12px; border-radius: 999px; font-size: 0.9rem; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .card { background: var(--white); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); }
+    .stat-label { font-size: 0.9rem; color: var(--muted); }
+    .stat-value { font-size: 1.6rem; font-weight: 700; margin-top: 8px; }
+    .layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid var(--border); text-align: left; font-size: 0.95rem; }
+    th { background: #f8fafc; color: var(--muted); font-weight: 600; }
+    .pill { display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .pill.pending { background: #fef3c7; color: #92400e; }
+    .pill.approved { background: #dcfce7; color: #166534; }
+    .pill.rejected { background: #fee2e2; color: #991b1b; }
+    .actions button { border: 0; padding: 6px 10px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-right: 6px; }
+    .btn-green { background: #dcfce7; color: #166534; }
+    .btn-red { background: #fee2e2; color: #991b1b; }
+    .btn-amber { background: #fef3c7; color: #92400e; }
+    .muted { color: var(--muted); }
+    .notice { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; padding: 12px 14px; border-radius: 10px; margin-bottom: 16px; }
+    .inline { display: flex; gap: 8px; flex-wrap: wrap; }
+    .form-grid { display: grid; gap: 10px; }
+    label { font-size: 0.9rem; font-weight: 600; }
+    input, select, textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); font: inherit; }
+    button.primary { background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%); color: var(--white); border: 0; padding: 10px 14px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+    .status { margin-top: 10px; font-size: 0.9rem; }
+    .status.success { color: var(--success); }
+    .status.error { color: var(--danger); }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>Admin Dashboard</h1>
+    <div class="badge">Secure Control Center</div>
+  </div>
+
+  <div class="container">
+    <div id="notice" class="notice">Loading dashboard data…</div>
+    <div class="grid">
+      <div class="card">
+        <div class="stat-label">Total Users</div>
+        <div id="users-count" class="stat-value">0</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Pending KYC</div>
+        <div id="kyc-count" class="stat-value">0</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Deposits</div>
+        <div id="deposits-count" class="stat-value">0</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Withdrawals</div>
+        <div id="withdrawals-count" class="stat-value">0</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">Available Balance</div>
+        <div id="balance-count" class="stat-value">$0</div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="card">
+        <h3 style="margin-top:0">User Management</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Balance</th>
+                <th>KYC</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0">Adjust Balance</h3>
+        <div class="form-grid">
+          <label>Choose User</label>
+          <select id="balance-user"></select>
+          <label>Amount</label>
+          <input id="balance-amount" type="number" min="1" step="1" placeholder="Enter amount" />
+          <label>Action</label>
+          <select id="balance-action">
+            <option value="add">Add Funds</option>
+            <option value="subtract">Subtract Funds</option>
+          </select>
+          <button class="primary" id="apply-balance-btn">Apply Balance Update</button>
+          <div id="balance-status" class="status"></div>
+        </div>
+
+        <hr style="margin: 18px 0; border-color: var(--border);" />
+
+        <h3 style="margin-top:0">KYC Review</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Status</th>
+                <th>Proof</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="kyc-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = { users: [], kyc: [] };
+    const notice = document.getElementById('notice');
+    const usersTableBody = document.getElementById('users-table-body');
+    const kycTableBody = document.getElementById('kyc-table-body');
+    const balanceUser = document.getElementById('balance-user');
+    const balanceAmount = document.getElementById('balance-amount');
+    const balanceAction = document.getElementById('balance-action');
+    const balanceStatus = document.getElementById('balance-status');
+
+    function money(value) { return `$${Number(value || 0).toLocaleString()}`; }
+
+    function renderUsers() {
+      usersTableBody.innerHTML = '';
+      balanceUser.innerHTML = '';
+      state.users.forEach((user) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${user.firstName || ''} ${user.lastName || ''}</td>
+          <td>${user.email || ''}</td>
+          <td>${user.nationality || 'N/A'}</td>
+          <td>${user.phone || 'N/A'}</td>
+          <td>${money(user.balance || 0)}</td>
+          <td><span class="pill ${user.kycVerified ? 'approved' : 'pending'}">${user.kycVerified ? 'Verified' : 'Pending'}</span></td>
+          <td class="actions"><button class="btn-green" data-user-id="${user.id}" data-action="approve">Approve</button><button class="btn-amber" data-user-id="${user.id}" data-action="verify">Verify KYC</button></td>`;
+        usersTableBody.appendChild(row);
+
+        const option = document.createElement('option');
+        option.value = user.id;
+        option.textContent = `${user.firstName || ''} ${user.lastName || ''} (${user.email || ''})`;
+        balanceUser.appendChild(option);
+      });
+    }
+
+    function renderKyc() {
+      kycTableBody.innerHTML = '';
+      if (!state.kyc.length) {
+        kycTableBody.innerHTML = '<tr><td colspan="4" class="muted">No KYC submissions yet.</td></tr>';
+        return;
+      }
+      state.kyc.forEach((item) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.userName || 'Unknown'}</td>
+          <td><span class="pill ${item.status}">${item.status}</span></td>
+          <td>${item.frontImage ? '<a href="' + item.frontImage + '" target="_blank">Open image</a>' : '—'}</td>
+          <td class="actions"><button class="btn-green" data-kyc-id="${item.id}" data-action="approve">Approve</button><button class="btn-red" data-kyc-id="${item.id}" data-action="reject">Reject</button></td>`;
+        kycTableBody.appendChild(row);
+      });
+    }
+
+    async function loadDashboard() {
+      notice.textContent = 'Loading dashboard data…';
+      try {
+        const [summaryRes, usersRes, kycRes] = await Promise.all([
+          fetch('/api/admin/summary'),
+          fetch('/api/admin/users'),
+          fetch('/api/admin/kyc')
+        ]);
+        const summaryData = await summaryRes.json();
+        const usersData = await usersRes.json();
+        const kycData = await kycRes.json();
+        if (!summaryData.success || !usersData.success || !kycData.success) throw new Error('Failed to load admin data');
+        state.users = usersData.users || [];
+        state.kyc = kycData.kyc || [];
+
+        document.getElementById('users-count').textContent = summaryData.summary.users || 0;
+        document.getElementById('kyc-count').textContent = summaryData.summary.pendingKyc || 0;
+        document.getElementById('deposits-count').textContent = summaryData.summary.deposits || 0;
+        document.getElementById('withdrawals-count').textContent = summaryData.summary.withdrawals || 0;
+        document.getElementById('balance-count').textContent = money(summaryData.summary.balance || 0);
+        renderUsers();
+        renderKyc();
+        notice.textContent = 'Dashboard ready. Review users and verification requests below.';
+      } catch (error) {
+        notice.textContent = error.message || 'Unable to load admin dashboard.';
+      }
+    }
+
+    async function updateKycStatus(kycId, status) {
+      const response = await fetch('/api/admin/kyc', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: kycId, status })
+      });
+      const data = await response.json();
+      if (!data.success) throw new Error(data.message || 'Unable to update KYC');
+      await loadDashboard();
+      return data;
+    }
+
+    async function applyBalanceUpdate() {
+      const userId = balanceUser.value;
+      const amount = Number(balanceAmount.value || 0);
+      const action = balanceAction.value;
+      if (!userId || !amount) {
+        balanceStatus.className = 'status error';
+        balanceStatus.textContent = 'Select a user and enter a valid amount.';
+        return;
+      }
+      const response = await fetch('/api/admin/balance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, amount, action })
+      });
+      const data = await response.json();
+      if (!data.success) {
+        balanceStatus.className = 'status error';
+        balanceStatus.textContent = data.message || 'Balance update failed.';
+        return;
+      }
+      balanceStatus.className = 'status success';
+      balanceStatus.textContent = data.message || 'Balance updated successfully.';
+      balanceAmount.value = '';
+      await loadDashboard();
+    }
+
+    document.addEventListener('click', async (event) => {
+      const kycButton = event.target.closest('[data-kyc-id]');
+      if (kycButton) {
+        try {
+          await updateKycStatus(kycButton.getAttribute('data-kyc-id'), kycButton.getAttribute('data-action'));
+        } catch (error) {
+          notice.textContent = error.message;
+        }
+      }
+      const userButton = event.target.closest('[data-user-id]');
+      if (userButton) {
+        const action = userButton.getAttribute('data-action');
+        if (action === 'approve') {
+          const userId = userButton.getAttribute('data-user-id');
+          const response = await fetch('/api/admin/approve-user', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId }) });
+          const data = await response.json();
+          if (data.success) { await loadDashboard(); } else { notice.textContent = data.message || 'Approval failed.'; }
+        }
+      }
+    });
+
+    document.getElementById('apply-balance-btn').addEventListener('click', applyBalanceUpdate);
+    loadDashboard();
+  </script>
+</body>
+</html>

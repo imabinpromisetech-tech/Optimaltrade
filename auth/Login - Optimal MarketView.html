@@ -299,7 +299,7 @@ body.loading-active #loading-overlay {
 
         
         
-        <form action="http://127.0.0.1:5500/Login%20-%20Optimal%20MarketView.html" method="POST">
+        <form id="login-form" action="#" method="POST">
             <div class="mb-4">
                 <label for="email" class="label">Email Address</label>
                 <input type="email" id="email" name="email" class="input-field" required="">
@@ -311,6 +311,7 @@ body.loading-active #loading-overlay {
             </div>
 
             <button type="submit" class="btn-primary w-full">Login</button>
+            <div id="form-message" class="hidden mt-4 rounded-lg border px-4 py-3 text-sm"></div>
         </form>
 
         <div class="mt-6 text-center space-y-2">
@@ -332,7 +333,6 @@ body.loading-active #loading-overlay {
     </footer>
     
     <script>
-        // Flash message auto-dismiss
         document.addEventListener('DOMContentLoaded', function() {
             const messages = document.querySelectorAll('.flash-message');
             messages.forEach(function(msg) {
@@ -344,23 +344,48 @@ body.loading-active #loading-overlay {
                     }, 500);
                 }, 5000);
             });
+
+            const form = document.getElementById('login-form');
+            const formMessage = document.getElementById('form-message');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const payload = {
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value
+                    };
+
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalText = submitButton.textContent;
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Signing in...';
+                    formMessage.className = 'hidden mt-4 rounded-lg border px-4 py-3 text-sm';
+
+                    try {
+                        const response = await fetch('/api/auth/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await response.json();
+                        if (!response.ok || !data.success) {
+                            throw new Error(data.message || 'Login failed');
+                        }
+                        localStorage.setItem('omv_token', data.token);
+                        localStorage.setItem('omv_user', JSON.stringify(data.user));
+                        formMessage.className = 'mt-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700';
+                        formMessage.textContent = data.message || 'Login successful.';
+                        window.location.href = '/dashboard/Dashboard%20-%20Optimal%20MarketView.html';
+                    } catch (error) {
+                        formMessage.className = 'mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+                        formMessage.textContent = error.message;
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalText;
+                    }
+                });
+            }
         });
-        
-        // Copy to clipboard function
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(function() {
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                button.classList.add('bg-green-600');
-                setTimeout(function() {
-                    button.textContent = originalText;
-                    button.classList.remove('bg-green-600');
-                }, 2000);
-            }).catch(function(err) {
-                console.error('Failed to copy:', err);
-                alert('Failed to copy to clipboard');
-            });
-        }
     </script>
 
 

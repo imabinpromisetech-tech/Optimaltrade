@@ -300,7 +300,7 @@ body.loading-active #loading-overlay {
         
                 
                 
-        <form action="http://127.0.0.1:5500/Register%20-%20Optimal%20MarketView.html" method="POST">
+        <form id="register-form" action="#" method="POST">
                         
             <div class="grid grid-cols-2 gap-4 mb-4">
                 <div>
@@ -543,25 +543,67 @@ body.loading-active #loading-overlay {
             </div>
             
             <button type="submit" class="btn-primary w-full">Create Account</button>
+            <div id="form-message" class="hidden mt-4 rounded-lg border px-4 py-3 text-sm"></div>
         </form>
         
         <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600">Already have an account? <a href="" class="text-blue-600 hover:text-blue-700">Login</a></p>
+            <p class="text-sm text-gray-600">Already have an account? <a href="Login - Optimal MarketView.html" class="text-blue-600 hover:text-blue-700">Login</a></p>
         </div>
     </div>
 </main>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
+    const form = document.getElementById('register-form');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('password_confirm');
+    const formMessage = document.getElementById('form-message');
     
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
         if (password.value !== confirmPassword.value) {
-            e.preventDefault();
-            alert('Passwords do not match');
-            return false;
+            formMessage.className = 'mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+            formMessage.textContent = 'Passwords do not match';
+            return;
+        }
+
+        const payload = {
+            firstname: document.getElementById('firstname').value,
+            lastname: document.getElementById('lastname').value,
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            nationality: document.getElementById('nationality').value,
+            password: password.value
+        };
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Creating account...';
+        formMessage.className = 'hidden mt-4 rounded-lg border px-4 py-3 text-sm';
+
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await response.json();
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || 'Registration failed');
+            }
+            localStorage.setItem('omv_token', data.user.id ? `token-${data.user.id}` : '');
+            localStorage.setItem('omv_user', JSON.stringify(data.user));
+            formMessage.className = 'mt-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700';
+            formMessage.textContent = data.message || 'Account created successfully.';
+            window.location.href = '/dashboard/Dashboard%20-%20Optimal%20MarketView.html';
+        } catch (error) {
+            formMessage.className = 'mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700';
+            formMessage.textContent = error.message;
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
         }
     });
 });

@@ -909,7 +909,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        const formData = new FormData(form);
+        const payload = {
+            amount: amountInput.value,
+            withdrawal_method: document.getElementById('withdrawal_method').value,
+            crypto_type: document.getElementById('crypto_type').value,
+            wallet_address: document.getElementById('wallet_address').value
+        };
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         
@@ -918,9 +923,10 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Processing...';
         formMessage.classList.add('hidden');
         
-        fetch('http://127.0.0.1:5500/Withdraw%20-%20Optimal%20MarketView.html', {
+        fetch('/api/withdrawals', {
             method: 'POST',
-            body: formData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         })
         .then(response => response.json())
         .then(data => {

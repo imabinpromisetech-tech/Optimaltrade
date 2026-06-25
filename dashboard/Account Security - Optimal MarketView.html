@@ -1221,11 +1221,18 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Changing...';
             formMessage.classList.add('hidden');
             
-            const returnUrl = formData.get('return_url') || 'https://account.optimalmarketview.com/user/account-security#password';
+            const token = localStorage.getItem('omv_token') || '';
+            const returnUrl = formData.get('return_url') || 'dashboard/Account Security - Optimal MarketView.html#password';
             
-            fetch('https://account.optimalmarketview.com/user/profile/password', {
+            fetch('/api/profile/password', {
                 method: 'POST',
-                body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    token,
+                    current_password: formData.get('current_password'),
+                    new_password: formData.get('new_password'),
+                    return_url: returnUrl
+                })
             })
             .then(response => {
                 // If response is a redirect, follow it
@@ -1283,9 +1290,11 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = action === 'enable' ? 'Enabling...' : 'Disabling...';
             formMessage.classList.add('hidden');
             
-            fetch('https://account.optimalmarketview.com/user/account-security/toggle-2fa', {
+            const token = localStorage.getItem('omv_token') || '';
+            fetch('/api/profile/2fa', {
                 method: 'POST',
-                body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token, action: formData.get('action') })
             })
             .then(response => response.json())
             .then(data => {
