@@ -4,7 +4,7 @@ const path = require('path');
 const { URL } = require('url');
 
 const rootDir = __dirname;
-let port = Number(process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
 const dataFile = path.join(rootDir, 'data', 'app-data.json');
 
 function ensureDataFile() {
@@ -150,6 +150,17 @@ const server = http.createServer(async (req, res) => {
       pathname === '/public/Optimizetradepro%20_%20Home.html' ||
       pathname === '/public/Optimizetradepro%20%20_%20%20Home.html' ||
       normalizedPath.endsWith('/public/Optimizetradepro _ Home.html');
+
+    if (req.method === 'GET' && pathname === '/api/health') {
+      sendJson(res, { ok: true, message: 'Server is running' });
+      return;
+    }
+
+    if (req.method === 'GET' && isAccessRoute) {
+      res.writeHead(302, { Location: '/' });
+      res.end();
+      return;
+    }
 
     if (req.method === 'GET' && pathname === '/api/health') {
       sendJson(res, { ok: true, message: 'Server is running' });
@@ -447,23 +458,9 @@ const server = http.createServer(async (req, res) => {
 });
 
 if (require.main === module) {
-  const tryListen = (currentPort) => {
-    server.once('error', (error) => {
-      if (error.code === 'EADDRINUSE' && currentPort < 3010) {
-        const fallbackPort = currentPort + 1;
-        console.warn(`Port ${currentPort} is busy, retrying on ${fallbackPort}`);
-        tryListen(fallbackPort);
-        return;
-      }
-      throw error;
-    });
-
-    server.listen(currentPort, () => {
-      console.log(`Server listening on http://localhost:${currentPort}`);
-    });
-  };
-
-  tryListen(port);
+  server.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
 }
 
 module.exports = { server, port };

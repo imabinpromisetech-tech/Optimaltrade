@@ -56,6 +56,15 @@ test('rejects invalid access codes', async () => {
   assert.match(body, /invalid/i);
 });
 
+test('redirects the protected homepage until access is granted', async () => {
+  const response = await fetch(`${baseUrl}/public/Optimizetradepro%20_%20Home.html`, {
+    redirect: 'manual'
+  });
+
+  assert.equal(response.status, 302);
+  assert.equal(response.headers.get('location'), '/');
+});
+
 test('stores pending KYC submissions and exposes them to admin summary', async () => {
   const email = `kyc-${Date.now()}@example.com`;
   const registrationResponse = await fetch(`${baseUrl}/api/auth/register`, {

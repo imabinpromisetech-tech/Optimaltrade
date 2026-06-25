@@ -13,19 +13,102 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css
     <link rel="stylesheet" href="./Optimizetradepro _ Home_files/style.css">
     <link rel="stylesheet" href="./Optimizetradepro _ Home_files/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Smartsupp Live Chat script -->
-<script type="text/javascript" async="" src="./Optimizetradepro _ Home_files/init.js.download"></script><script type="text/javascript" charset="utf-8" async="" src="./Optimizetradepro _ Home_files/loader.js.download"></script><script type="text/javascript">
-var _smartsupp = _smartsupp || {};
-_smartsupp.key = '78e877bf4c3055da644fc485f9b131ac2c931f9f';
-window.smartsupp||(function(d) {
-  var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
-  s=d.getElementsByTagName('script')[0];c=d.createElement('script');
-  c.type='text/javascript';c.charset='utf-8';c.async=true;
-  c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
-})(document);
-</script>
-
     <style>
+        .assistant-widget {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 2147483647;
+            font-family: 'Work Sans', 'Open Sans', sans-serif;
+        }
+        .assistant-toggle {
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #228C22 0%, #0b6623 100%);
+            color: white;
+            padding: 12px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        .assistant-panel {
+            display: none;
+            width: min(340px, calc(100vw - 32px));
+            max-height: 440px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .assistant-panel.open {
+            display: flex;
+            flex-direction: column;
+        }
+        .assistant-header {
+            background: #0b6623;
+            color: white;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+        }
+        .assistant-header button {
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .assistant-messages {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            min-height: 220px;
+            max-height: 280px;
+        }
+        .assistant-bubble {
+            padding: 10px 12px;
+            border-radius: 12px;
+            max-width: 85%;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+        .assistant-bubble.bot {
+            background: #eef7ed;
+            color: #123b17;
+            align-self: flex-start;
+        }
+        .assistant-bubble.user {
+            background: #0b6623;
+            color: white;
+            align-self: flex-end;
+        }
+        .assistant-input-row {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .assistant-input-row input {
+            flex: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            padding: 10px 12px;
+            outline: none;
+        }
+        .assistant-input-row button {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 12px;
+            background: #228C22;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
         summary {
             font-size: .8rem;
             font-weight: 400;
@@ -1777,58 +1860,23 @@ aa14458f8082d9c4265ef491ca0b5d4801c16bbf7a4aece7b70a0b4824ffdfea
                     <p class="uk-text-lead uk-margin-medium-bottom">See our pricing table to make your investment dream a reality, easy signup, user friendly dashboad and 24/7 support.</p>
                     <div class="uk-card uk-card-secondary uk-card-body uk-border-rounded uk-box-shadow-large widget-card">
                         <!-- TradingView Widget BEGIN -->
-                        <div class="tradingview-widget-container" style="height: calc(100% - 32px);">
-                            <div id="tradingview_1cb78" style="height: 100%;">
-				<iframe title="symbol overview TradingView widget" lang="en" id="tradingview_d6ed8" src="./Optimizetradepro _ Home_files/saved_resource.html" style="
-						margin: 0 !important;
-						padding: 0 !important;
-						width: 100%;
-						height: 100%;
-					" frameborder="0" allowtransparency="true" scrolling="no">
-				</iframe>
-			</div>
-                            <div class="tradingview-widget-copyright" style="width: 100%;"><a href="https://www.tradingview.com/symbols/AAPL/?utm_source=optimalmarketview.com&amp;utm_medium=widget_new&amp;utm_campaign=symbol-overview" rel="noopener" target="_blank"><span class="blue-text">Apple</span></a> by TradingView</div>
-                            <script type="text/javascript" src="./Optimizetradepro _ Home_files/tv.js.download"></script>
+                        <div class="tradingview-widget-container" style="height: 420px;">
+                            <div id="tradingview_market_widget_1" style="height: 100%;"></div>
+                            <div class="tradingview-widget-copyright" style="width: 100%;"><a href="https://www.tradingview.com/" rel="noopener" target="_blank"><span class="blue-text">Market overview</span></a> by TradingView</div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                             <script type="text/javascript">
-                                new TradingView.MediumWidget({
-                                    "symbols": [
-                                        [
-                                            "Apple",
-                                            "AAPL|1D"
-                                        ],
-                                        [
-                                            "Google",
-                                            "GOOGL|1D"
-                                        ],
-                                        [
-                                            "Microsoft",
-                                            "MSFT|1D"
-                                        ],
-                                        [
-                                            "Amazon",
-                                            "NASDAQ:AMZN|1D"
-                                        ]
-                                    ],
-                                    "chartOnly": true,
-                                    "width": "100%",
-                                    "height": "100%",
-                                    "locale": "en",
-                                    "colorTheme": "light",
+                                new TradingView.widget({
                                     "autosize": true,
-                                    "showVolume": true,
-                                    "hideDateRanges": false,
-                                    "scalePosition": "right",
-                                    "scaleMode": "Normal",
-                                    "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-                                    "noTimeScale": false,
-                                    "valuesTracking": "1",
-                                    "chartType": "line",
-                                    "fontColor": "#787b86",
-                                    "gridLineColor": "rgba(42, 46, 57, 0.06)",
-                                    "volumeUpColor": "rgba(34, 171, 148, 0.5)",
-                                    "volumeDownColor": "rgba(247, 82, 95, 0.5)",
-                                    "backgroundColor": "#ffffff",
-                                    "container_id": "tradingview_1cb78"
+                                    "symbol": "NASDAQ:AAPL",
+                                    "interval": "D",
+                                    "timezone": "Etc/UTC",
+                                    "theme": "light",
+                                    "style": "1",
+                                    "locale": "en",
+                                    "toolbar_bg": "#f1f3f6",
+                                    "enable_publishing": false,
+                                    "allow_symbol_change": true,
+                                    "container_id": "tradingview_market_widget_1"
                                 });
                             </script>
                         </div>
@@ -2153,13 +2201,10 @@ aa14458f8082d9c4265ef491ca0b5d4801c16bbf7a4aece7b70a0b4824ffdfea
                         <div class="uk-card uk-card-large uk-card-default uk-margin-top in-paper-card">
                             <div class="uk-card-body">
                                 <!-- TradingView Widget BEGIN -->
-                                <div class="tradingview-widget-container">
-                                    <div id="tradingview_8b03c"><div id="tradingview_4661a-wrapper" style="position: relative;box-sizing: content-box;width: 100%;height: 100%;margin: 0 auto !important;padding: 0 !important;font-family: -apple-system, BlinkMacSystemFont, &#39;Trebuchet MS&#39;, Roboto, Ubuntu, sans-serif;"><div style="width: 100%;height: 100%;padding: 0 !important;">
-				<iframe title="advanced chart TradingView widget" lang="en" id="tradingview_4661a" src="./Optimizetradepro _ Home_files/saved_resource(1).html" style="width: 100%; height: 100%; margin: 0 !important; padding: 0 !important;" frameborder="0" allowtransparency="true" scrolling="no" allowfullscreen="">
-				</iframe>
-			</div></div></div>
-                                    <div class="tradingview-widget-copyright" style="width: 100%;"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/?utm_source=optimalmarketview.com&amp;utm_medium=widget_new&amp;utm_campaign=chart&amp;utm_term=NASDAQ%3AAAPL" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
-                                    <script type="text/javascript" src="./Optimizetradepro _ Home_files/tv.js.download"></script>
+                                <div class="tradingview-widget-container" style="height: 420px;">
+                                    <div id="tradingview_chart_widget_2" style="height: 100%;"></div>
+                                    <div class="tradingview-widget-copyright" style="width: 100%;"><a href="https://www.tradingview.com/chart/" rel="noopener" target="_blank"><span class="blue-text">AAPL Chart</span></a> by TradingView</div>
+                                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
                                     <script type="text/javascript">
                                         new TradingView.widget({
                                             "autosize": true,
@@ -2172,7 +2217,7 @@ aa14458f8082d9c4265ef491ca0b5d4801c16bbf7a4aece7b70a0b4824ffdfea
                                             "toolbar_bg": "#f1f3f6",
                                             "enable_publishing": false,
                                             "allow_symbol_change": true,
-                                            "container_id": "tradingview_8b03c"
+                                            "container_id": "tradingview_chart_widget_2"
                                         });
                                     </script>
                                 </div>
@@ -2189,77 +2234,48 @@ aa14458f8082d9c4265ef491ca0b5d4801c16bbf7a4aece7b70a0b4824ffdfea
 
 
          <!-- section content begin -->
-        <div class="uk-section in-profit-12">
+        <div class="uk-section in-profit-12" style="padding-top: 24px; padding-bottom: 24px;">
             <div class="uk-container">
-                <div class="uk-grid-large uk-flex uk-flex-center uk-grid" data-uk-grid="">
-                    <div class="uk-width-1-2@m uk-text-center uk-first-column">
-                        <div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-medium" style="border:1px solid #274c77;">
-                            <div class="uk-card-body">
-      <!-- TradingView Widget BEGIN -->
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container" style="width: 100%; height: 600px;">
-        <iframe scrolling="no" allowtransparency="true" frameborder="0" src="./Optimizetradepro _ Home_files/saved_resource(2).html" title="hotlists TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: calc(100% - 32px); width: 100%;"></iframe>
-        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/stocks-usa/?utm_source=optimalmarketview.com&amp;utm_medium=widget_new&amp;utm_campaign=hotlists" rel="noopener" target="_blank"><span class="blue-text">Stock Market Today</span></a> by TradingView</div>
-        
-      <style>
-	.tradingview-widget-copyright {
-		font-size: 13px !important;
-		line-height: 32px !important;
-		text-align: center !important;
-		vertical-align: middle !important;
-		/* @mixin sf-pro-display-font; */
-		font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
-		color: #B2B5BE !important;
-	}
-
-	.tradingview-widget-copyright .blue-text {
-		color: #2962FF !important;
-	}
-
-	.tradingview-widget-copyright a {
-		text-decoration: none !important;
-		color: #B2B5BE !important;
-	}
-
-	.tradingview-widget-copyright a:visited {
-		color: #B2B5BE !important;
-	}
-
-	.tradingview-widget-copyright a:hover .blue-text {
-		color: #1E53E5 !important;
-	}
-
-	.tradingview-widget-copyright a:active .blue-text {
-		color: #1848CC !important;
-	}
-
-	.tradingview-widget-copyright a:visited .blue-text {
-		color: #2962FF !important;
-	}
-	</style></div>
-      <!-- TradingView Widget END -->
+                <div class="uk-grid-large uk-flex uk-flex-middle uk-grid" data-uk-grid="">
+                    <div class="uk-width-1-2@m">
+                        <div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small" style="border:1px solid #274c77; margin-bottom: 0;">
+                            <div class="uk-card-body" style="padding: 16px;">
+                                <h3 style="color: #274c77; margin-top: 0;">Live Fx &amp; Spot Metal Quotes</h3>
+                                <p style="text-align: justify; text-justify: inter-word; font-size:14px; margin-bottom: 12px;">Optimizetradepro is an American-based investment firm with offices in UK, Canada, Usa and Europe and Russia. We are a dynamic group whose main focus is to provide our clients with the best possible service. We diversify portfolio management through trading of different commodities and assets in the capital markets at large, and also we earn through the crypto space through mining of promising Coins, after which royalties earned through mining and switched into a more secure platform which is Stocks and Foreign exchange trading.</p>
+                                <ul class="uk-list uk-list-bullet in-list-check uk-margin-bottom">
+                                    <li>Ultra-competitive pricing</li>
+                                    <li>Trading flexibility</li>
+                                    <li>Award-winning platform</li>
+                                </ul>
+                                <h5 class="uk-heading-bullet" style="color: #274c77;">Trade wherever you are, whenever you want to.</h5>
                             </div>
                         </div>
                     </div>
                     <div class="uk-width-1-2@m">
-                        <h2 style="color: #274c77;">Live Fx &amp; Spot Metal Quotes</h2>
-                        <p style="text-align: justify; text-justify: inter-word; font-size:14px;">Optimizetradepro is an American-based investment firm with offices in UK, Canada, Usa and Europe and Russia. We are a dynamic group whose main focus is to provide our clients with the best possible service. We diversify portfolio management through trading of different commodities and assets in the capital markets at large, and also we earn through the crypto space through mining of promising Coins, after which royalties earned through mining and switched into a more secure platform which is Stocks and Foreign exchange trading.</p>
-                        <ul class="uk-list uk-list-bullet in-list-check uk-margin-bottom">
-                            <li>Ultra-competitive pricing</li>
-                            <li>Trading flexibility</li>
-                            <li>Award-winning platform</li>
-                        </ul>
-                        <h5 class="uk-heading-bullet " style="color: #274c77;">Trade wherever you are, whenever you want to.</h5>
-                       <!-- <div data-uk-margin>
-                            <a href="#" class="uk-button in-button-app uk-margin-small-right">
-                                <i class="fab fa-google-play fa-2x"></i>
-                                <span class="wrapper">Download from<span>Play Store</span></span>
-                            </a>
-                            <a href="#" class="uk-button in-button-app">
-                                <i class="fab fa-apple fa-2x"></i>
-                                <span class="wrapper">Download from<span>App Store</span></span>
-                            </a>
-                        </div>-->
+                        <div class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small" style="border:1px solid #274c77; margin-bottom: 0;">
+                            <div class="uk-card-body" style="padding: 16px;">
+                                <div style="font-size: 0.9rem; font-weight: 700; color: #274c77; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">Market Snapshot</div>
+                                <div class="tradingview-widget-container" style="height: 260px; width: 100%;">
+                                    <div id="tradingview_market_snapshot" style="height: 100%;"></div>
+                                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                                    <script type="text/javascript">
+                                        new TradingView.widget({
+                                            "autosize": true,
+                                            "symbol": "NASDAQ:AAPL",
+                                            "interval": "D",
+                                            "timezone": "Etc/UTC",
+                                            "theme": "light",
+                                            "style": "1",
+                                            "locale": "en",
+                                            "toolbar_bg": "#f1f3f6",
+                                            "enable_publishing": false,
+                                            "allow_symbol_change": true,
+                                            "container_id": "tradingview_market_snapshot"
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2872,4 +2888,89 @@ Earn up to 8% commission every time your friends invest.</center></h2>
     display: false;
     align-items: false;
     flex-direction: row-reverse;
-  "><div class="sc-q8c6tt-3 kvLxar"><div color="#4dc247" size="50" class="sc-q8c6tt-1 ljrDDi"><a size="50" href="https://wa.me/212687526607" target="_blank" aria-label="Go to whatsapp" color="#4dc247" id="" direction="column" order="whatsapp" class="sc-q8c6tt-0 bvGVHZ"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%; fill: rgb(255, 255, 255); stroke: none;"><path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z"></path></svg></a></div></div><a size="50" type="link" href="https://getbutton.io/?utm_campaign=multy_widget&amp;utm_medium=widget&amp;utm_source=optimalmarketview.com" target="_blank" aria-label="Go to GetButton.io website" class="sc-sbsi7l-0 ijfSyc"><div class="sc-1au8ryl-0 dkuywW"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58.16 10.15"><path d="M2.49,6.42,1.65,9.75c-.09.27.18.54.4.21L3.68,7.89A5.49,5.49,0,0,0,4.76,8C7.4,8,9.53,6.21,9.53,4S7.4,0,4.76,0,0,1.79,0,4A3.47,3.47,0,0,0,.24,5.25a.45.45,0,0,0,.49.18,7.07,7.07,0,0,0,.7-.26s.24-.1.19-.48h0A2,2,0,0,1,1.49,4C1.49,2.62,3,1.5,4.76,1.5S8,2.62,8,4,6.57,6.5,4.76,6.5a4.06,4.06,0,0,1-1.68-.36A.49.49,0,0,0,2.49,6.42Z" fill="#afafaf"></path><path d="M11.12,10.15H11l-1.49-.9a5.45,5.45,0,0,1-2.4.6,4.16,4.16,0,0,1-2.27-.62L5,9.17c2.22,0,5.43-1.66,5.61-4.37h0a3,3,0,0,1,.57,1.86,2.33,2.33,0,0,1-.65,1.64l.52,1.29s.22.44.16.51-.06.05-.11.05Z" fill="#afafaf"></path><path d="M49.84,3.21h0a2.33,2.33,0,0,1,2.32,2.34v1.3a2.33,2.33,0,0,1-2.32,2.33h0a2.34,2.34,0,0,1-2.33-2.33V5.55A2.34,2.34,0,0,1,49.84,3.21Zm0,1.16h0a1,1,0,0,1,1,1V7a1,1,0,0,1-1,1h0a1,1,0,0,1-1-1V5.39A1,1,0,0,1,49.84,4.37Z" fill="#afafaf" fill-rule="evenodd"></path><path d="M55.83,3.21h0a2.34,2.34,0,0,1,2.33,2.34V9.06H56.84V5.39a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V9.06H53.5V5.55A2.34,2.34,0,0,1,55.83,3.21Z" fill="#afafaf"></path><path d="M36.93,9.06h0a2.33,2.33,0,0,0,2.33-2.32V3.21H37.94V6.9a1,1,0,0,1-1,1h0a1,1,0,0,1-1-1V3.21H34.6V6.74A2.33,2.33,0,0,0,36.93,9.06Z" fill="#afafaf"></path><polygon points="43.2 3.37 42.12 3.37 42.12 1.79 40.97 1.79 40.97 3.37 39.91 3.37 40.26 4.39 40.97 4.39 40.97 9.03 42.12 9.03 42.12 4.39 43.2 4.39 43.2 3.37" fill="#afafaf"></polygon><polygon points="46.76 3.37 45.67 3.37 45.67 1.79 44.52 1.79 44.52 3.37 43.47 3.37 43.81 4.39 44.52 4.39 44.52 9.03 45.67 9.03 45.67 4.39 46.76 4.39 46.76 3.37" fill="#afafaf"></polygon><path d="M28.56,1.73H30.9a3.48,3.48,0,0,1,1.34.18,1.53,1.53,0,0,1,.66.63,2.11,2.11,0,0,1,.27,1,2,2,0,0,1-.23.95,1.6,1.6,0,0,1-.59.64,1.49,1.49,0,0,1,.8.64,2.09,2.09,0,0,1,.3,1.11,2.31,2.31,0,0,1-.38,1.35,1.54,1.54,0,0,1-.88.68A9,9,0,0,1,30.54,9h-2ZM29.73,3V4.64h.78a7.06,7.06,0,0,0,.87,0,.71.71,0,0,0,.47-.26A.86.86,0,0,0,32,3.77a.91.91,0,0,0-.14-.52A.64.64,0,0,0,31.55,3a8.16,8.16,0,0,0-1.14,0Zm0,2.9V7.79h1.1a3.49,3.49,0,0,0,.92-.07.71.71,0,0,0,.35-.3,1.13,1.13,0,0,0,.13-.58,1.2,1.2,0,0,0-.14-.59.88.88,0,0,0-.4-.32,4.1,4.1,0,0,0-1-.08Z" fill="#afafaf"></path><polygon points="27.56 3.37 26.47 3.37 26.47 1.79 25.32 1.79 25.32 3.37 24.27 3.37 24.62 4.39 25.32 4.39 25.32 9.03 26.47 9.03 26.47 4.39 27.56 4.39 27.56 3.37" fill="#afafaf"></polygon><path d="M21.49,3.21h0a2.34,2.34,0,0,1,2.33,2.34v1H20.48V7c0,1.25,1.94,1.19,2.3.72l1,.72c-1.13,1.36-4.59.87-4.59-1.61V5.55A2.34,2.34,0,0,1,21.49,3.21Zm-1,2.38h2v-.2a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1Z" fill="#afafaf"></path><path d="M17.27,3.05a3.82,3.82,0,0,0-2.68,0,1.14,1.14,0,0,0-.5.79h0V6.86a1.17,1.17,0,0,0,1.06,1,3.9,3.9,0,0,0,1.54-.09V6.12H15.9V4.77H18v3.4a.64.64,0,0,1-.31.64,4.55,4.55,0,0,1-2.73.4A2.52,2.52,0,0,1,12.75,7V3.79h0a2.67,2.67,0,0,1,1.14-1.92l0,0c1.56-.91,3.82,0,3.83,0Z" fill="#afafaf"></path></svg></div></a></div><div id="smartsupp-widget-container"><!----><!----><!----> <!----><!----> <!----><div data-testid="widgetButtonFrame" style="border-radius: 9999px; box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 2px 32px; color-scheme: normal; height: 56px; position: fixed; bottom: 24px; left: initial; right: 12px; z-index: 10000000; width: 109px;"><iframe allowfullscreen="" scrolling="no" id="widgetButtonFrame" title="Smartsupp widget button" style="position: absolute; width: 100%; height: 100%; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; display: block; text-align: left; margin: 0px; padding: 0px; top: 0px; left: 0px; opacity: 1;" src="./Optimizetradepro _ Home_files/saved_resource(6).html"></iframe><!----></div><!----> <!----><!----> <!----><!----><!----></div></body></html>
+  "><div class="sc-q8c6tt-3 kvLxar"><div color="#4dc247" size="50" class="sc-q8c6tt-1 ljrDDi"><a size="50" href="https://wa.me/212687526607" target="_blank" aria-label="Go to whatsapp" color="#4dc247" id="" direction="column" order="whatsapp" class="sc-q8c6tt-0 bvGVHZ"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%; fill: rgb(255, 255, 255); stroke: none;"><path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.78 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.722.888.817 0 2.15-.515 2.478-1.318.13-.33.244-.73.244-1.088 0-.058 0-.144-.03-.215-.1-.172-2.434-1.39-2.678-1.39zm-2.908 7.593c-1.747 0-3.48-.53-4.942-1.49L7.793 24.41l1.132-3.337a8.955 8.955 0 0 1-1.72-5.272c0-4.955 4.04-8.995 8.997-8.995S25.2 10.845 25.2 15.8c0 4.958-4.04 8.998-8.998 8.998zm0-19.798c-5.96 0-10.8 4.842-10.8 10.8 0 1.964.53 3.898 1.546 5.574L5 27.176l5.974-1.92a10.807 10.807 0 0 0 16.03-9.455c0-5.958-4.842-10.8-10.802-10.8z"></path></svg></a></div></div><a size="50" type="link" href="https://getbutton.io/?utm_campaign=multy_widget&amp;utm_medium=widget&amp;utm_source=optimalmarketview.com" target="_blank" aria-label="Go to GetButton.io website" class="sc-sbsi7l-0 ijfSyc"><div class="sc-1au8ryl-0 dkuywW"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58.16 10.15"><path d="M2.49,6.42,1.65,9.75c-.09.27.18.54.4.21L3.68,7.89A5.49,5.49,0,0,0,4.76,8C7.4,8,9.53,6.21,9.53,4S7.4,0,4.76,0,0,1.79,0,4A3.47,3.47,0,0,0,.24,5.25a.45.45,0,0,0,.49.18,7.07,7.07,0,0,0,.7-.26s.24-.1.19-.48h0A2,2,0,0,1,1.49,4C1.49,2.62,3,1.5,4.76,1.5S8,2.62,8,4,6.57,6.5,4.76,6.5a4.06,4.06,0,0,1-1.68-.36A.49.49,0,0,0,2.49,6.42Z" fill="#afafaf"></path><path d="M11.12,10.15H11l-1.49-.9a5.45,5.45,0,0,1-2.4.6,4.16,4.16,0,0,1-2.27-.62L5,9.17c2.22,0,5.43-1.66,5.61-4.37h0a3,3,0,0,1,.57,1.86,2.33,2.33,0,0,1-.65,1.64l.52,1.29s.22.44.16.51-.06.05-.11.05Z" fill="#afafaf"></path><path d="M49.84,3.21h0a2.33,2.33,0,0,1,2.32,2.34v1.3a2.33,2.33,0,0,1-2.32,2.33h0a2.34,2.34,0,0,1-2.33-2.33V5.55A2.34,2.34,0,0,1,49.84,3.21Zm0,1.16h0a1,1,0,0,1,1,1V7a1,1,0,0,1-1,1h0a1,1,0,0,1-1-1V5.39A1,1,0,0,1,49.84,4.37Z" fill="#afafaf" fill-rule="evenodd"></path><path d="M55.83,3.21h0a2.34,2.34,0,0,1,2.33,2.34V9.06H56.84V5.39a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V9.06H53.5V5.55A2.34,2.34,0,0,1,55.83,3.21Z" fill="#afafaf"></path><path d="M36.93,9.06h0a2.33,2.33,0,0,0,2.33-2.32V3.21H37.94V6.9a1,1,0,0,1-1,1h0a1,1,0,0,1-1-1V3.21H34.6V6.74A2.33,2.33,0,0,0,36.93,9.06Z" fill="#afafaf"></path><polygon points="43.2 3.37 42.12 3.37 42.12 1.79 40.97 1.79 40.97 3.37 39.91 3.37 40.26 4.39 40.97 4.39 40.97 9.03 42.12 9.03 42.12 4.39 43.2 4.39 43.2 3.37" fill="#afafaf"></polygon><polygon points="46.76 3.37 45.67 3.37 45.67 1.79 44.52 1.79 44.52 3.37 43.47 3.37 43.81 4.39 44.52 4.39 44.52 9.03 45.67 9.03 45.67 4.39 46.76 4.39 46.76 3.37" fill="#afafaf"></polygon><path d="M28.56,1.73H30.9a3.48,3.48,0,0,1,1.34.18,1.53,1.53,0,0,1,.66.63,2.11,2.11,0,0,1,.27,1,2,2,0,0,1-.23.95,1.6,1.6,0,0,1-.59.64,1.49,1.49,0,0,1,.8.64,2.09,2.09,0,0,1,.3,1.11,2.31,2.31,0,0,1-.38,1.35,1.54,1.54,0,0,1-.88.68A9,9,0,0,1,30.54,9h-2ZM29.73,3V4.64h.78a7.06,7.06,0,0,0,.87,0,.71.71,0,0,0,.47-.26A.86.86,0,0,0,32,3.77a.91.91,0,0,0-.14-.52A.64.64,0,0,0,31.55,3a8.16,8.16,0,0,0-1.14,0Zm0,2.9V7.79h1.1a3.49,3.49,0,0,0,.92-.07.71.71,0,0,0,.35-.3,1.13,1.13,0,0,0,.13-.58,1.2,1.2,0,0,0-.14-.59.88.88,0,0,0-.4-.32,4.1,4.1,0,0,0-1-.08Z" fill="#afafaf"></path><polygon points="27.56 3.37 26.47 3.37 26.47 1.79 25.32 1.79 25.32 3.37 24.27 3.37 24.62 4.39 25.32 4.39 25.32 9.03 26.47 9.03 26.47 4.39 27.56 4.39 27.56 3.37" fill="#afafaf"></polygon><path d="M21.49,3.21h0a2.34,2.34,0,0,1,2.33,2.34v1H20.48V7c0,1.25,1.94,1.19,2.3.72l1,.72c-1.13,1.36-4.59.87-4.59-1.61V5.55A2.34,2.34,0,0,1,21.49,3.21Zm-1,2.38h2v-.2a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1Z" fill="#afafaf"></path><path d="M17.27,3.05a3.82,3.82,0,0,0-2.68,0,1.14,1.14,0,0,0-.5.79h0V6.86a1.17,1.17,0,0,0,1.06,1,3.9,3.9,0,0,0,1.54-.09V6.12H15.9V4.77H18v3.4a.64.64,0,0,1-.31.64,4.55,4.55,0,0,1-2.73.4A2.52,2.52,0,0,1,12.75,7V3.79h0a2.67,2.67,0,0,1,1.14-1.92l0,0c1.56-.91,3.82,0,3.83,0Z" fill="#afafaf"></path></svg></div></a></div><div id="smartsupp-widget-container"><!----><!----><!----> <!----><!----> <!----><div data-testid="widgetButtonFrame" style="border-radius: 9999px; box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 2px 32px; color-scheme: normal; height: 56px; position: fixed; bottom: 24px; left: initial; right: 12px; z-index: 10000000; width: 109px;"><iframe allowfullscreen="" scrolling="no" id="widgetButtonFrame" title="Smartsupp widget button" style="position: absolute; width: 100%; height: 100%; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; display: block; text-align: left; margin: 0px; padding: 0px; top: 0px; left: 0px; opacity: 1;" src="./Optimizetradepro _ Home_files/saved_resource(6).html"></iframe><!----></div><!----> <!----><!----> <!----><!----><!----></div>    <div class="assistant-widget" id="assistant-widget">
+        <div class="assistant-panel" id="assistant-panel">
+            <div class="assistant-header">
+                <span>Virtual Assistant</span>
+                <button type="button" id="assistant-close" aria-label="Close assistant">×</button>
+            </div>
+            <div class="assistant-messages" id="assistant-messages">
+                <div class="assistant-bubble bot">Hello! I can help with access, deposits, withdrawals, KYC, and referrals.</div>
+            </div>
+            <div class="assistant-input-row">
+                <input id="assistant-input" type="text" placeholder="Ask about deposits or support..." />
+                <button type="button" id="assistant-send">Send</button>
+            </div>
+        </div>
+        <button class="assistant-toggle" id="assistant-toggle" type="button">💬 Help</button>
+    </div>
+
+    <script>
+        const assistantPanel = document.getElementById('assistant-panel');
+        const assistantToggle = document.getElementById('assistant-toggle');
+        const assistantClose = document.getElementById('assistant-close');
+        const assistantMessages = document.getElementById('assistant-messages');
+        const assistantInput = document.getElementById('assistant-input');
+        const assistantSend = document.getElementById('assistant-send');
+
+        function addMessage(text, type) {
+            const bubble = document.createElement('div');
+            bubble.className = `assistant-bubble ${type}`;
+            bubble.textContent = text;
+            assistantMessages.appendChild(bubble);
+            assistantMessages.scrollTop = assistantMessages.scrollHeight;
+        }
+
+        function getAssistantReply(message) {
+            const normalized = message.toLowerCase();
+            if (normalized.includes('access') || normalized.includes('code')) {
+                return 'Use the access code OPTIMALTRADER@33 on the entry page to continue.';
+            }
+            if (normalized.includes('deposit')) {
+                return 'You can start a deposit from the dashboard Deposit page and choose your preferred payment method.';
+            }
+            if (normalized.includes('withdraw') || normalized.includes('cashout')) {
+                return 'Withdrawals are handled through the dashboard Withdraw page. Make sure your balance is available.';
+            }
+            if (normalized.includes('kyc')) {
+                return 'KYC review is available in the dashboard. Upload your documents and wait for the admin review.';
+            }
+            if (normalized.includes('referral') || normalized.includes('invite')) {
+                return 'Use the referral link in the dashboard to invite friends and earn bonuses when they create accounts.';
+            }
+            if (normalized.includes('hello') || normalized.includes('hi')) {
+                return 'Hello! I can help with access, deposits, withdrawals, KYC, and referrals.';
+            }
+            return 'I can help with access, deposits, withdrawals, KYC, and referrals. Try asking for one of those topics.';
+        }
+
+        function sendAssistantMessage() {
+            const message = assistantInput.value.trim();
+            if (!message) return;
+            addMessage(message, 'user');
+            assistantInput.value = '';
+            window.setTimeout(() => addMessage(getAssistantReply(message), 'bot'), 250);
+        }
+
+        assistantToggle.addEventListener('click', () => {
+            assistantPanel.classList.toggle('open');
+            assistantToggle.style.display = assistantPanel.classList.contains('open') ? 'none' : '';
+            if (assistantPanel.classList.contains('open')) {
+                assistantInput.focus();
+            }
+        });
+
+        assistantClose.addEventListener('click', () => {
+            assistantPanel.classList.remove('open');
+            assistantToggle.style.display = '';
+        });
+
+        assistantSend.addEventListener('click', sendAssistantMessage);
+        assistantInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendAssistantMessage();
+            }
+        });
+    </script>
+</body></html>

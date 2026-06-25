@@ -1,0 +1,68 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start local site",
+			"type": "shell",
+			"command": "node server.js",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start local site",
+			"type": "shell",
+			"command": "node server.js",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start local site 3001",
+			"type": "shell",
+			"command": "cmd /d /c \"set PORT=3001 && node server.js\"",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start local site 3001",
+			"type": "shell",
+			"command": "$env:PORT='3001'; node server.js",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start local site 3001",
+			"type": "shell",
+			"command": "powershell -NoProfile -Command \"$env:PORT='3001'; node server.js\"",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start updated server on 3001",
+			"type": "shell",
+			"command": "node -e \"process.env.PORT='3001'; require('./server');\"",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Start updated server on 3001",
+			"type": "shell",
+			"command": "node -e \"process.env.PORT='3001'; require('child_process').execSync('node server.js', {stdio:'inherit'});\"",
+			"args": [],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
